@@ -1,19 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthProvider";
+import { auth } from "../firebase/firebase.config";
+
+
 const Navbar = () => {
+    const { name, user, setUser, signOutUser } = useContext(AuthContext);
+    console.log(user);
+
+   
+
   const links = (
     <>
       <li>
-        <NavLink to='/'>Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to='/destination'>Destination</NavLink>
+        <NavLink to="/destination">Destination</NavLink>
       </li>
       <li>
-        <NavLink to='/blog'>Blog</NavLink>
+        <NavLink to="/blog">Blog</NavLink>
       </li>
       <li>
-        <NavLink to='/contact'>Contact</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
       </li>
     </>
   );
@@ -61,10 +71,20 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal text-white px-1">{links}</ul>
         </div>
+
         <div className="navbar-end">
-          <Link to="/login" className="btn">
-            Login
-          </Link>
+          {user ? (
+              <div className="flex items-center gap-4">
+                          <p className="text-white text-2xl"> { user.email}</p>
+              <Link onClick={signOutUser} to="/login" className="btn">
+                Log Out
+                          </Link>
+            </div>
+          ) : (
+              <Link to="/login" className="btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
