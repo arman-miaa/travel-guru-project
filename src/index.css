@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-banner {
+  background-image: url('./src/assets/Rectangle 1.png');
+  background-color: rgba(16, 16, 16, 0.688);
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+}
